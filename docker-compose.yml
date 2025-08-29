@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  music-classification-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    volumes:
+      # Mount the other repositories for development
+      - ../music-classification-model:/app/music-classification-model:ro
+      - ../music-classification-preprocessing:/app/music-classification-preprocessing:ro
+      # Mount temp directory for audio processing
+      - ./temp:/app/temp
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+      # Override Python paths for container
+      - PythonModel__ModelScriptPath=/app/music-classification-model/inference.py
+      - PythonModel__ModelFilePath=/app/music-classification-model/models/api_model.pth
+      - PythonModel__WorkingDirectory=/app/music-classification-model
+      - Preprocessing__PreprocessingScriptPath=/app/music-classification-preprocessing/src/cli.py
+    depends_on:
+      - python-model-service
+    networks:
+      - music-classification-network
+
+  # Optional: Separate Python service for better isolation
+  python-model-service:
+    build:
+      context: ../music-classification-model
+      dockerfile: Dockerfile.api
+    volumes:
+      - ../music-classification-model:/app/model:ro
+      - ../music-classification-preprocessing:/app/preprocessing:ro
+    networks:
+      - music-classification-network
+    # This service would host the Python model as a separate microservice
+
+networks:
+  music-classification-network:
+    driver: bridge
+
+volumes:
+  temp-audio:
+  model-cache:

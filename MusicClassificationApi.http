@@ -1,0 +1,33 @@
+### Music Classification API Test Requests
+
+@baseUrl = http://localhost:5242
+
+### Health Check
+GET {{baseUrl}}/api/health
+
+### API Information
+GET {{baseUrl}}/api/health/info
+
+### Test JSON Analysis (you need to replace the audioData with actual base64)
+POST {{baseUrl}}/api/music/analyze
+Content-Type: application/json
+
+{
+  "audioData": "UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACAAAAZGF0YQAAAAA=",
+  "fileName": "test_audio.wav",
+  "format": "wav"
+}
+
+### Test File Upload (replace with actual file path)
+POST {{baseUrl}}/api/music/analyze/upload
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="test.wav"
+Content-Type: audio/wav
+
+[BINARY_FILE_DATA_HERE]
+--boundary--
+
+### Test Preprocessed Data Analysis
+POST {{baseUrl}}/api/music/analyze/preprocessed?featuresPath=temp/features.json&spectrogramPath=temp/spectrogram.npy&fileName=test_song.wav
