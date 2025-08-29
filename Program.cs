@@ -85,3 +85,6 @@ app.MapControllers();
 app.MapGet("/", () => Results.Redirect("/swagger"));
 
 app.Run();
+
+// Make Program class accessible for integration tests
+public partial class Program { }

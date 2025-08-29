@@ -32,9 +32,9 @@ public class PythonMusicClassificationService : IMusicClassificationService
         PreprocessingConfiguration preprocessingConfig,
         ILogger<PythonMusicClassificationService> logger)
     {
-        _modelConfig = modelConfig;
-        _preprocessingConfig = preprocessingConfig;
-        _logger = logger;
+        _modelConfig = modelConfig ?? throw new ArgumentNullException(nameof(modelConfig));
+        _preprocessingConfig = preprocessingConfig ?? throw new ArgumentNullException(nameof(preprocessingConfig));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     public async Task<MusicAnalysisResponse> AnalyzeMusicAsync(MusicAnalysisRequest request)
