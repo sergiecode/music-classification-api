@@ -6,7 +6,6 @@
 
 [![.NET](https://img.shields.io/badge/.NET-9.0-blue.svg)](https://dotnet.microsoft.com)
 [![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-9.0-purple.svg)](https://docs.microsoft.com/en-us/aspnet/core)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 A high-performance ASP.NET Core Web API that provides REST endpoints for music classification using AI models. This API serves as the production-ready frontend for the music classification pipeline, integrating with the preprocessing and ML model components.
 
@@ -681,10 +680,6 @@ music-classification-preprocessing
 - Implement proper error handling
 - Add unit tests for new features
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🙏 Acknowledgments
 
 - **Microsoft**: ASP.NET Core framework
@@ -708,3 +703,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Happy coding and music making! 🎵**
 
 Built with ❤️ by [Sergie Code](https://github.com/sergiecode) for the AI Tools for Musicians series.
+
